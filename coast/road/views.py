@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from datetime import datetime
 from .models import Place, ReportCategory, Video, VideoReport
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 def home(request):
     return render(request, 'home.html')
@@ -44,6 +45,7 @@ def day(request, place_slug, year, month, day):
         'place': place
     })
 
+@ensure_csrf_cookie
 def video(request, id):
     video = get_object_or_404(Video, id=id)
     return render(request, 'video.html', {
