@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block extra_head %}
+  <div class="container-sm">
+    <img id="report-image" src="{{ report.frame_base64 }}" />
+    <p>
+      <a href="/video/{{ report.video.id }}#{{ report.timecode }}">
+        See Full Video
+      </a>
+    </p>
+    <p>
+      Report filed on {{ report.created|date:"D d M Y" }}  at {{ report.created|date:"H:i" }}
+    </p>
+    <p>
+      Time of video: {{ report.get_timestamp|date:"D d M Y" }} at {{ report.get_timestamp|date:"H:i" }}
+    </p>
+    <p>
+      {{ report.description }}
+    </p>
+    <div class="container-sm">
+      {% if previous_report %}
+      <a href="/report/video/{{ previous_report.id }}">Previous Report</a>
+      {% endif %}
+      {% if next_report %}
+      <a href="/report/video/{{ next_report.id }}">Next Report</a>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h3>
+  {{ day|date:"d M, Y" }} at <a href="/place/{{ place.slug }}">{{ place.name }}</a>
+</h3>
+<ul class="list-block">
+  {% for v in videos %}
+  <li>
+    <a href="/video/{{ v.id }}">
+      {{ v.start_time|date:"P" }} - {{ v.end_time|date:"P" }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

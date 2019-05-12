@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h3>
+  {{ place.name }}
+</h3>
+<ul class="list-block">
+  {% for m in months %}
+  <li>
+    <a href='/place/{{place.slug}}/{{m|date:"Y"}}/{{m|date:"n"}}'>
+      {{ m|date:"F Y" }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

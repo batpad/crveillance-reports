@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<ul class="list-block">
+  {% for p in places %}
+  <li>
+    <a href='/place/{{ p.slug }}'>
+      {{ p.name }}
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
