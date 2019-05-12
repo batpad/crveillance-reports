@@ -17,6 +17,7 @@ function getCookie(name) {
 $(function() {
   var videoElem = $('#video').get(0);
   var isFocussed = false;
+
   function getFrameData() {
     var canvas = document.createElement('canvas');
     canvas.height = videoElem.videoHeight;
@@ -40,11 +41,13 @@ $(function() {
   }
   
   videoElem.onplay = function () {
+    console.log('video onplay');
     $('#pauseVideo').text('Pause! (space)');
     $('.js-show-on-pause').hide();
   }
   
   videoElem.onloadedmetadata = function() {
+    console.log('onloadedmetadata');
     if (window.location.hash !== '#') {
       var hash = window.location.hash.replace('#', '');
       var newTime = parseFloat(Number(hash) / 1000).toFixed(3);
@@ -60,6 +63,14 @@ $(function() {
     }
   });
   
+  $('.js-jumpToTimecode').click(function(e) {
+    console.log('clicked');
+    e.preventDefault();
+    var timecode = Number($(this).attr('data-timecode'));
+    console.log(timecode);
+    videoElem.currentTime = timecode / 1000;
+  });
+
   $('#goBack').click(function() {
     var currentTimeMs= videoElem.currentTime * 1000;
     var prevFrame = currentTimeMs - 40;
@@ -70,7 +81,7 @@ $(function() {
   });
   
   $('#goForward').click(function() {
-    var currentTimeMs= videoElem.currentTime * 1000;
+    var currentTimeMs = videoElem.currentTime * 1000;
     var nextFrame = currentTimeMs + 40;
     if (nextFrame / 1000 > videoElem.duration) {
       nextFrame = videoElem.duration * 1000;
@@ -127,6 +138,7 @@ $(function() {
   });
 
   $(document).keyup(function(e) {
+    console.log('keyup');
     e.preventDefault();
     if (isFocussed) {
       return;

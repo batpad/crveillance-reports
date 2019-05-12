@@ -13,7 +13,7 @@
   </a>
 </div>
 <h3>{{ video.get_title }}</h3>
-<video src='/media/{{ video.video.name }}' class="video" id="video" controls></video>
+<video src='/media/{{ video.video.name }}' class="video" id="video" controls="controls"></video>
 <div class="video-controls container-sm">
   <button class="btn" id="slowdown">Slowdown (s)</button>
   <button class="btn" id="goBack">Prev Frame (←)</button>
@@ -33,6 +33,19 @@
       <button id="submit" class="btn">Submit Report</button>
     </div>
 </form>
+{% if existing_reports %}
+  <div class="container-sm">
+    <h5>Existing Reports:</h5>
+    <ul>
+      {% for report in existing_reports %}
+      <li>
+        <a href="/report/video/{{ report.id }}">See Report</a>
+        <a href="#" class="js-jumpToTimecode" data-timecode="{{ report.timecode }}">(Goto Frame)</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
 <div class="container-sm">
   {% if previous_video %}
   <a href="/video/{{ previous_video.id }}">Previous Video</a>

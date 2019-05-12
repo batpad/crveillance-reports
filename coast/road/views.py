@@ -49,7 +49,8 @@ def video(request, id):
     return render(request, 'video.html', {
         'video': video,
         'previous_video': video.get_previous_video(),
-        'next_video': video.get_next_video()
+        'next_video': video.get_next_video(),
+        'existing_reports': VideoReport.objects.filter(video=video)
     })
 
 def reports(request):
