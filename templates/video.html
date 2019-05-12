@@ -23,6 +23,7 @@
   <button class="btn" id="speedUp">Speed Up (f)</button>
 </div>
 <form class="container-sm hide js-show-on-pause">
+  {% csrf_token %}
   <div class="form-field-block">
     <label for="report-description">
       Description of your report:
