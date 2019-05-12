@@ -104,6 +104,8 @@ $(function() {
     var imageData = getFrameData();
     var description = $('#report-description').val();
     var formData = new FormData();
+    $('#submit').hide();
+    $('.js-submit-div').text('Submitting Report...')
     formData.append('frame_base64', imageData);
     formData.append('description', description);
     formData.append('video', VIDEO_ID);
@@ -116,7 +118,11 @@ $(function() {
       body: formData
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+      const reportId = data.report_id;
+      const $a = $('<a />').prop('href', '/report/video/' + reportId).text('Report Submitted');
+      $('.js-submit-div').empty().append($a);
+    })
     .catch(e => console.log('error', e))
   });
 
