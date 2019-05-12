@@ -3,6 +3,9 @@ from django.http import JsonResponse
 from datetime import datetime
 from .models import Place, ReportCategory, Video, VideoReport
 
+def home(request):
+    return render(request, 'home.html')
+
 def places(request):
     return render(request, 'places.html', {
         'places': Place.objects.all()
