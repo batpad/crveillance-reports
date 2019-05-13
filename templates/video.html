@@ -25,14 +25,26 @@
 <form class="container-sm hide js-show-on-pause">
   {% csrf_token %}
   <div class="form-field-block">
+    <label for="report-title">
+      Title for report:
+    </label>
+    <input id="report-title" type="text" />
+  </div>
+  <div class="form-field-block">
     <label for="report-description">
       Description of your report:
     </label>
     <textarea id="report-description"></textarea>
   </div>
-  <div class="form-field-block js-submit-div">
-      <button id="submit" class="btn">Submit Report</button>
+  <div class="form-field-block">
+      <label for="report-title">
+        Your name (optional):
+      </label>
+      <input id="report-name" type="text" />
     </div>
+  <div class="form-field-block js-submit-div">
+    <button id="submit" class="btn">Submit Report</button>
+  </div>
 </form>
 {% if existing_reports %}
   <div class="container-sm">

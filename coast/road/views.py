@@ -71,11 +71,15 @@ def report(request, typ, id):
 
 def add_report(request):
     description  = request.POST['description']
+    title = request.POST['title']
+    reporter_name = request.POST['reporter_name']
     frame_base64 = request.POST['frame_base64']
     video = request.POST['video']
     timecode = request.POST['timecode']
     vr = VideoReport()
+    vr.title = title
     vr.description  = description
+    vr.reporter_name = reporter_name
     vr.frame_base64 = frame_base64
     vr.video_id = int(video)
     vr.timecode = timecode

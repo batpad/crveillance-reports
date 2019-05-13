@@ -114,13 +114,17 @@ $(function() {
     var csrftoken = getCookie('csrftoken');
     var imageData = getFrameData();
     var description = $('#report-description').val();
+    var title = $('#report-title').val();
+    var reporterName = $('#report-name').val();
     var formData = new FormData();
     $('#submit').hide();
     $('.js-submit-div').text('Submitting Report...')
     formData.append('frame_base64', imageData);
     formData.append('description', description);
     formData.append('video', VIDEO_ID);
-    formData.append('timecode', Math.floor(videoElem.currentTime * 1000))
+    formData.append('timecode', Math.floor(videoElem.currentTime * 1000));
+    formData.append('title', title);
+    formData.append('reporter_name', reporterName)
     fetch('/add_report', {
       method: 'POST',
       headers: {

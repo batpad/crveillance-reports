@@ -6,7 +6,7 @@
   {% for report in reports %}
   <li>
     <a href="/report/video/{{ report.id }}">
-      {{ report.video.place.name }}: {{ report.get_timestamp|date:"D d M Y" }} {{ report.get_timestamp|time:"H:i" }} - {{ report.description }}
+      {{ report.video.place.name }}: {{ report.get_timestamp|date:"D d M Y" }} {{ report.get_timestamp|time:"H:i" }} - {{ report.title }}
     </a>
   </li>
   {% endfor %}

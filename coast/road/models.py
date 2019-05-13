@@ -75,6 +75,8 @@ class VideoReport(TimeStampedModel):
     user = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     timecode = models.IntegerField(help_text='timecode of incident, saved in ms')
     frame_base64 = models.TextField(blank=True, null=True)
+    title = models.CharField(blank=True, null=True, max_length=512)
+    reporter_name = models.CharField(blank=True, null=True, max_length=255)
     description = models.TextField()
     category = models.ForeignKey(ReportCategory, on_delete=models.PROTECT, null=True, blank=True)
     severity_level = models.IntegerField(choices=SEVERITY_CHOICES, db_index=True, null=True, blank=True)
@@ -99,7 +101,7 @@ class VideoReport(TimeStampedModel):
             return previous_report[0]
         else:
             return None 
-         
+
     def __str__(self):
         return self.description
 
