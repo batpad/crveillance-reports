@@ -3,7 +3,40 @@
 {% block extra_head %}
   <div class="container-sm">
     <h4>{{ report.title }}</h4>
-    <img id="report-image" src="{{ report.frame_base64 }}" />
+    <style>
+    #imgbox { position: relative; }    
+    #markercircle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transition: all 0.4s ease-in-out;
+        opacity: 1;
+    }
+    #report-image { opacity: 0.75; }
+    </style>
+    <div id="imgbox">
+      <img id="report-image" src="{{ report.frame_base64 }}" />
+      <div id="markercircle"></div>
+    </div>
+    <p>
+      Focus:<br>
+      <input id="markersize" type="number" value="30"></input>
+      <input id="markerleft" type="number" value="50"></input>
+      <input id="markertop" type="number" value="50"></input>
+    </p>
+    <script>
+    $('#markercircle').css('background', 
+      'url('+ $('#report-image').prop('src') +')');
+    $('#markersize, #markerleft, #markertop').change( function () {
+      $('#markercircle').css('clip-path','circle('+
+          $('#markersize').val()+'% at '+
+          $('#markerleft').val()+'% '+
+          $('#markertop').val()+'%)');
+    });
+    $('#markersize').change();
+    </script>
     <p>
       <a href="/video/{{ report.video.id }}#{{ report.timecode }}">
         See Full Video
