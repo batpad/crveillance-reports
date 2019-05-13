@@ -102,6 +102,9 @@ class VideoReport(TimeStampedModel):
         else:
             return None 
 
+    def get_absolute_url(self):
+        return '/report/video/%d' % self.id
+        
     def __str__(self):
         return self.description
 

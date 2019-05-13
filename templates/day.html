@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h3>
+<h1 class="text-center">
   {{ day|date:"d M, Y" }} at <a href="/place/{{ place.slug }}">{{ place.name }}</a>
-</h3>
-<ul class="list-block">
+</h1>
+<ul class="list-block container-lg">
   {% for v in videos %}
   <li>
     <a href="/video/{{ v.id }}">

@@ -12,23 +12,28 @@
     Back to day
   </a>
 </div>
-<h3>{{ video.get_title }}</h3>
+<h1 class="text-center">{{ video.get_title }}</h1>
 <video src='/media/{{ video.video.name }}' class="video" id="video" controls="controls"></video>
 <div class="video-controls container-sm">
-  <button class="btn" id="slowdown">Slowdown (s)</button>
-  <button class="btn" id="goBack">Prev Frame (←)</button>
-  <button class="btn" id="pauseVideo">Play! (space)</button>
-  <button class="btn" id="resetSpeed">Reset Speed (r)</button>
-  <button class="btn" id="goForward">Next Frame (→)</button>
-  <button class="btn" id="speedUp">Speed Up (f)</button>
+  <button class="btn btn--sm" id="slowdown">Slowdown (s)</button>
+  <button class="btn btn--sm" id="goBack">Prev Frame (←)</button>
+  <button class="btn btn--sm" id="pauseVideo">Play! (space)</button>
+  <button class="btn btn--sm" id="resetSpeed">Reset Speed (r)</button>
+  <button class="btn btn--sm" id="goForward">Next Frame (→)</button>
+  <button class="btn btn--sm" id="speedUp">Speed Up (f)</button>
 </div>
-<form class="container-sm hide js-show-on-pause">
+
+<form class="container-sm">
+  <h2 class="margin-reset">Make a Report</h2>
+  <div class="subheading">
+    To make a report, pause the video at an appropriate point, and fill the form below and submit.
+  </div>
   {% csrf_token %}
   <div class="form-field-block">
     <label for="report-title">
       Title for report:
     </label>
-    <input id="report-title" type="text" />
+    <input id="report-title" class="input-text" type="text" />
   </div>
   <div class="form-field-block">
     <label for="report-description">
@@ -40,7 +45,7 @@
       <label for="report-title">
         Your name (optional):
       </label>
-      <input id="report-name" type="text" />
+      <input id="report-name" class="input-text" type="text" />
     </div>
   <div class="form-field-block js-submit-div">
     <button id="submit" class="btn">Submit Report</button>
