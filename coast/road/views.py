@@ -75,7 +75,7 @@ def add_report(request):
     reporter_name = request.POST['reporter_name']
     frame_base64 = request.POST['frame_base64']
     video = request.POST['video']
-    timecode = request.POST['timecode']
+    timecode = request.POST['timecode']        
     vr = VideoReport()
     vr.title = title
     vr.description  = description
@@ -83,6 +83,10 @@ def add_report(request):
     vr.frame_base64 = frame_base64
     vr.video_id = int(video)
     vr.timecode = timecode
+    if ('point_x' in request.POST):
+        vr.point_x = request.POST['point_x']
+        vr.point_y = request.POST['point_y']
+        vr.point_radius = request.POST['point_radius']
     vr.save()
     return JsonResponse({
         'report_id': vr.id
