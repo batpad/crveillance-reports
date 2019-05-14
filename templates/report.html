@@ -4,16 +4,7 @@
   <div class="container-sm">
     <h4>{{ report.title }}</h4>
     <style>
-    #imgbox { position: relative; }    
-    #markercircle {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transition: all 0.4s ease-in-out;
-        opacity: 1;
-    }
+    #imgbox { position: relative; }
     #report-image { opacity: 0.75; }
     </style>
     <div id="imgbox">
@@ -29,7 +20,7 @@
       <input id="markertop" type="hidden" value="16.88972"></input> -->
     </p>
     <script>
-    $('#markercircle').css('background', 
+    $('#markercircle').css('background-image', 
       'url('+ $('#report-image').prop('src') +')');
     $('#markersize, #markerleft, #markertop').change( function () {
       $('#markercircle').css('clip-path','circle('+
