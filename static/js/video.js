@@ -139,6 +139,15 @@ $(function() {
     videoElem.playbackRate = 1;
   });
   
+  function resetSubmitBtn() {
+    console.log('call reset submit btn');
+    $('.js-submit-div').removeClass('hide');
+  }
+
+  function showSubmitError(msg) {
+    $('.js-submit-message').text(msg);
+  }
+
   $('#submit').click(function(e) {
     e.preventDefault();
     var csrftoken = getCookie('csrftoken');
@@ -154,8 +163,8 @@ $(function() {
       var pointRadius = Number($('#markersizer').val());
     }
     var formData = new FormData();
-    $('#submit').hide();
-    $('.js-submit-div').text('Submitting Report...')
+    $('.js-submit-div').addClass('hide');
+    $('.js-submit-message').removeClass('hide').text('Submitting Report...')
     formData.append('frame_base64', imageData);
     formData.append('description', description);
     formData.append('video', VIDEO_ID);
@@ -174,11 +183,25 @@ $(function() {
       },
       body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+      if (response.status === 400) {
+        showSubmitError('Error submitting report. Please ensure you have filled in a title and description.');
+        resetSubmitBtn();
+        return false;
+      } else if (response.status !== 200) {
+        showSubmitError('There was an unknown error uploading your report. Please try again after sometime. If the problem persists, contact a site administrator.');
+        resetSubmitBtn();
+        return false;
+      } else if (response.status === 200) {
+        return response.json();
+      }
+    })
     .then(data => {
-      const reportId = data.report_id;
-      const $a = $('<a />').prop('href', '/report/video/' + reportId).text('Report Submitted');
-      $('.js-submit-div').empty().append($a);
+      if (data) {
+        const reportId = data.report_id;
+        const $a = $('<a />').prop('href', '/report/video/' + reportId).text('Report Submitted');
+        $('.js-submit-message').empty().append($a);
+      }
     })
     .catch(e => console.log('error', e))
   });

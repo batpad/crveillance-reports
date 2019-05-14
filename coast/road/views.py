@@ -72,6 +72,10 @@ def report(request, typ, id):
 def add_report(request):
     description  = request.POST['description']
     title = request.POST['title']
+    if description == '' or title == '':
+        return JsonResponse({
+            'error': 'Title or description cannot be empty'
+        }, status=400)
     reporter_name = request.POST['reporter_name']
     frame_base64 = request.POST['frame_base64']
     video = request.POST['video']
