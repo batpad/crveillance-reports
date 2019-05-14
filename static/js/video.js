@@ -109,12 +109,14 @@ $(function() {
     });
     $('.js-highlightImage').after(
       '<input type="range" id="markersizer" name="markersizer" value="10" min="2" max="50"></input>'+
-      '<input id="markerleft" name="markerleft" type="number" value="50"></input>'+
-      '<input id="markertop" name="markertop" type="number" value="50"></input>');
+      '<input id="markerleft" name="markerleft" type="hidden" value="50"></input>'+
+      '<input id="markertop" name="markertop" type="hidden" value="50"></input><br />' + 
+      'Mark highlighted area in report: <input id="submit_highlight" type="checkbox" checked />')
     $('#markersizer').width('100%').change( function() {
       $('#markercircle').css('clip-path', 'circle('+$(this).val()+'% at '+
         $('#markerleft').val()+'% '+$('#markertop').val()+'%');
     });
+
   });
 
   $('#slowdown').click(function() {
@@ -144,6 +146,13 @@ $(function() {
     var description = $('#report-description').val();
     var title = $('#report-title').val();
     var reporterName = $('#report-name').val();
+    var hasHighlight = $('#submit_highlight').length && $('#submit_highlight').prop('checked');
+    var pointX, pointY, pointRadius;
+    if (hasHighlight) {
+      var pointX = Number($('#markerleft').val());
+      var pointY = Number($('#markertop').val());
+      var pointRadius = Number($('#markersizer').val());
+    }
     var formData = new FormData();
     $('#submit').hide();
     $('.js-submit-div').text('Submitting Report...')
@@ -152,7 +161,12 @@ $(function() {
     formData.append('video', VIDEO_ID);
     formData.append('timecode', Math.floor(videoElem.currentTime * 1000));
     formData.append('title', title);
-    formData.append('reporter_name', reporterName)
+    formData.append('reporter_name', reporterName);
+    if (hasHighlight) {
+      formData.append('point_x', pointX);
+      formData.append('point_y', pointY);
+      formData.append('point_radius', pointRadius);
+    }
     fetch('/add_report', {
       method: 'POST',
       headers: {

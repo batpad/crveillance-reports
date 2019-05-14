@@ -22,9 +22,12 @@
     </div>
     <p>
       Focus:<br>
-      <input id="markersize" type="number" value="30"></input>
-      <input id="markerleft" type="number" value="50"></input>
-      <input id="markertop" type="number" value="50"></input>
+      <input id="markersize" type="hidden" value="{{ report.point_radius }}"></input>
+      <input id="markerleft" type="hidden" value="{{ report.point_x }}"></input>
+      <input id="markertop" type="hidden" value="{{ report.point_y }}"></input>
+      <!-- <input id="markersize" type="hidden" value="10"></input>
+      <input id="markerleft" type="hidden" value="67.708333"></input>
+      <input id="markertop" type="hidden" value="16.88972"></input> -->
     </p>
     <script>
     $('#markercircle').css('background', 

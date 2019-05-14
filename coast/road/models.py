@@ -79,6 +79,9 @@ class VideoReport(TimeStampedModel):
     reporter_name = models.CharField(blank=True, null=True, max_length=255)
     description = models.TextField()
     category = models.ForeignKey(ReportCategory, on_delete=models.PROTECT, null=True, blank=True)
+    point_x = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
+    point_y = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
+    point_radius = models.IntegerField(blank=True, null=True)
     severity_level = models.IntegerField(choices=SEVERITY_CHOICES, db_index=True, null=True, blank=True)
     is_verified = models.BooleanField(default=False, db_index=True)
 
