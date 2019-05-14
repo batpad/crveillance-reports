@@ -91,6 +91,7 @@ $(function() {
   
   $('#markImage').click(function(e) {
     e.preventDefault();
+    $(this).hide();
     var imageData = getFrameData();
     var $img = $('<img />').prop('src', imageData);
     $('.js-highlightImage').empty().append($img).removeClass('hide');
