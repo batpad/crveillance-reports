@@ -97,7 +97,7 @@ $(function() {
     $('.js-highlightImage').empty().append($img).removeClass('hide');
     $('<div />')
       .prop('id','markercircle')
-      .css('background','url('+ imageData +')')
+      .css('background-image','url('+ imageData +')')
       .css('clip-path', 'circle(10% at 50% 50%)')
       .appendTo('.js-highlightImage');
     $('.js-highlightImage').click( function(e) {
