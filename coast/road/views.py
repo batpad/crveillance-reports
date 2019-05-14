@@ -58,7 +58,7 @@ def video(request, id):
 def reports(request):
     #TODO: add filtering for reports, add image reports
     return render(request, 'reports.html', {
-        'reports': VideoReport.objects.all()
+        'reports': VideoReport.objects.all().order_by('-created')
     })
 
 def report(request, typ, id):
