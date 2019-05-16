@@ -39,7 +39,13 @@ class Command(BaseCommand):
         place = Place.objects.get(slug='worli-dairy')
         for mp4_path in glob.glob(os.path.join(input_dir, '**/*.mp4'), recursive=True):
             base_path = mp4_path.replace(input_dir, '')
+            print('base_path', base_path)
             video_path = os.path.join('videos', base_path)
+            print('video_path', video_path)
+            existing_videos = Video.objects.filter(video=video_path)
+            if existing_videos.count() > 0:
+                print('skipping', video_path)
+                continue
             image_path = os.path.join('images', base_path.replace('.mp4', '.jpg'))
             filename = os.path.basename(base_path)
             start_time = filename.split('_')[0]
