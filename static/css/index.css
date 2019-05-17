@@ -30,6 +30,10 @@ a {
   color: var(--brand-1);
 }
 
+a:visited {
+  color: darkblue;
+}
+
 a:hover, a:focus {
   color: var(--color-font);
 }

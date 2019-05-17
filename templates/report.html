@@ -41,7 +41,7 @@
     <p>
       Time of video: {{ report.get_timestamp|date:"D d M Y" }} at {{ report.get_timestamp|date:"H:i" }}
     </p>
-    {{ report.description|linebreaks }}
+    {{ report.description|urlize|linebreaks }}
     <div class="container-sm">
       {% if previous_report %}
       <a href="/report/video/{{ previous_report.id }}">Previous Report</a>
