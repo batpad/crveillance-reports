@@ -113,7 +113,7 @@ $(function() {
       '<input id="markerleft" name="markerleft" type="hidden" value="50"></input>'+
       '<input id="markertop" name="markertop" type="hidden" value="50"></input><br />' + 
       'Mark highlighted area in report: <input id="submit_highlight" type="checkbox" checked />')
-    $('#markersizer').width('100%').change( function() {
+    $('#markersizer').width('100%').on( 'input', function() {
       $('#markercircle').css('clip-path', 'circle('+$(this).val()+'% at '+
         $('#markerleft').val()+'% '+$('#markertop').val()+'%');
     });
